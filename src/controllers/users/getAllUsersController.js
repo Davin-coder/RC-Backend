@@ -1,6 +1,6 @@
-import getAllUserModels from "../../models/getAllUsersModels.js"
+import getAllUserModels from "../../models/users/getAllUsersModels.js";
 
-const GetAllUsersController = {
+export const GetAllUsersController = {
     async getAllUser(req, res) {
         try {
             const users = await getAllUserModels.getAllUsers();
@@ -9,8 +9,8 @@ const GetAllUsersController = {
                 msg: "Users retrieved successfully", 
                 users
             });
-        } catch (error) {
-            console.error('GetAllUsers Error:', error);
+        }catch(error){
+            console.error('GetAllUsers Error:', error.message);
             res.status(500).json({ 
                 success: false,
                 error: true, 
@@ -18,6 +18,4 @@ const GetAllUsersController = {
             });
         }
     }
-}
-
-export default GetAllUsersController;
+};

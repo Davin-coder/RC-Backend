@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import userRoutes from "./src/routes/users/userRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -13,17 +13,8 @@ app.get("/", (req, res) => {
   res.send("✅ Server is running!");
 });
 
-/**********************************/
-/************USERS*****************/
-/**********************************/
-
+// ============= // Users EndPoints // =============
 app.use("/users", userRoutes);
-
-/**********************************/
-/***********CLEANINGS**************/
-/**********************************/
-
-app.use("/cleanings", cleaningRoutes);
 
 
 app.listen(PORT, () => {
