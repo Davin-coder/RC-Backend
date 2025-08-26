@@ -93,7 +93,7 @@ CREATE TABLE submissions (
     repo_url TEXT,
     screenshots JSONB,
     notes TEXT,
-    submission_status TEXT CHECK (status IN ('submitted','pending')) DEFAULT 'submitted',
+    submission_status TEXT CHECK (submission_status IN ('submitted','pending')) DEFAULT 'submitted',
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -103,7 +103,7 @@ CREATE TABLE hackathons (
     hackathon_description TEXT,
     start_at TIMESTAMPTZ,
     end_at TIMESTAMPTZ,
-    hackathon_status TEXT CHECK (status IN ('upcoming','ongoing','finished')) DEFAULT 'upcoming',
+    hackathon_status TEXT CHECK (hackathon_status IN ('upcoming','ongoing','finished')) DEFAULT 'upcoming',
     created_by INT REFERENCES users(id_user),
     allow_teams BOOLEAN DEFAULT TRUE
 );
@@ -158,7 +158,7 @@ CREATE TABLE project_votes (
 
 CREATE TABLE events (
     id_event SERIAL PRIMARY KEY,
-    event_type TEXT CHECK (type IN ('tutoring','life_skills','english')) NOT NULL,
+    event_type TEXT CHECK (event_type IN ('tutoring','life_skills','english')) NOT NULL,
     title TEXT NOT NULL,
     event_description TEXT,
     event_date DATE NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE event_registrations (
     registration_id SERIAL PRIMARY KEY,
     id_event INT REFERENCES events(id_event) ON DELETE CASCADE,
     id_user INT REFERENCES users(id_user) ON DELETE CASCADE,
-    registration_status TEXT CHECK (status IN ('registered','attended','missed')) DEFAULT 'registered',
+    registration_status TEXT CHECK (registration_status IN ('registered','attended','missed')) DEFAULT 'registered',
     created_at TIMESTAMPTZ DEFAULT NOW(),
     UNIQUE (id_event, id_user)
 );
@@ -188,7 +188,7 @@ CREATE TABLE user_roles(
 CREATE TABLE user_skills(
     id_user INT REFERENCES users(id_user) ON DELETE CASCADE,
     id_skill INT REFERENCES skills(id_skill) ON DELETE CASCADE,
-    user_level SMALLINT CHECK (level BETWEEN 1 AND 5),
+    user_level SMALLINT CHECK (user_level BETWEEN 1 AND 5),
     PRIMARY KEY (id_user, id_skill)
 );
 
@@ -203,7 +203,7 @@ CREATE TABLE user_badges(
 CREATE TABLE group_members (
     id_group INT REFERENCES groups(id_group) ON DELETE CASCADE,
     id_user INT REFERENCES users(id_user) ON DELETE CASCADE,
-    member_role TEXT CHECK (role IN ('leader','member')) DEFAULT 'member',
+    member_role TEXT CHECK (member_role IN ('leader','member')) DEFAULT 'member',
     joined_at TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (id_group, id_user)
 );

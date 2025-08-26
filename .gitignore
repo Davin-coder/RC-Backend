@@ -1,6 +1,3 @@
 node_modules/
 package-lock.json
-.env
 .vscode/
-querys.sql
-inserts.sql

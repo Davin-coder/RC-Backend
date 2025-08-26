@@ -18,7 +18,7 @@ const getOneUserModels = {
             `;
             const result = await pool.query(query, [id_user]);
             return result.rows[0] || null              
-        } catch (error) {
+        }catch(error){
             throw new Error('Database query failed: ' + error.message);
         }
     }

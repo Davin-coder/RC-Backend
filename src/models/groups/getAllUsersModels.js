@@ -1,15 +1,27 @@
-import pool from '../middleware/connection.js'
+import pool from "../../middleware/connection.js"
 
-const getAllGroupsModels = {
-    async getAllGroups() {
+const getAllGroupModels = {
+    async getUser(id_user) {
         try {
-            const query = 'SELECT * FROM groups';
-            const result = await pool.query(query);
-            return result.rows; 
-        } catch (error) {
+            const query = 
+            `SELECT
+            u.first_name,
+            u.first_surname,
+            ci.city_name,
+            cl.clan_name,
+            u.id_cohort,
+            u.email
+            FROM users u
+            INNER JOIN cities ci ON u.id_city = ci.id_city
+            INNER JOIN clans cl ON u.id_clan = cl.id_clan
+            WHERE id_user = $1;
+            `;
+            const result = await pool.query(query, [id_user]);
+            return result.rows[0] || null              
+        }catch(error){
             throw new Error('Database query failed: ' + error.message);
         }
     }
-}
+};
 
-export default getAllUserModels;
+export default getAllGroupModels;
