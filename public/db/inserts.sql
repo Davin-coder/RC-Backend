@@ -31,3 +31,6 @@ VALUES
 INSERT INTO users
 (id_city, id_cohort, id_clan, first_name, first_surname, email, password_user)
 VALUES (2, 3, 1, 'Alex', 'Tuiran', 'alex@email.com', '123');
+
+INSERT INTO groups (group_name, id_creator)
+VALUES ('Software Factory', 1);

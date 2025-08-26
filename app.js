@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import userRoutes from "./src/routes/users/userRoutes.js"
+import userRoutes from "./src/routes/users/userRoutes.js";
+import groupsRoutes from "./src/routes/groups/groupsRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
 // ============= // Users EndPoints // =============
 app.use("/users", userRoutes);
 
+// ============= // Groups EndPoints // =============
+app.use("/groups", groupsRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
