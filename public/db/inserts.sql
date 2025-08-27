@@ -34,3 +34,6 @@ VALUES (2, 3, 1, 'Alex', 'Tuiran', 'alex@email.com', '123');
 
 INSERT INTO groups (group_name, id_creator)
 VALUES ('Software Factory', 1);
+
+INSERT INTO events (event_type, title, event_description, event_date)
+VALUES ('life_skills', 'Meet Soft-Skills', 'Be a better human with this event', '2025-01-11');

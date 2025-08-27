@@ -162,8 +162,6 @@ CREATE TABLE events (
     title TEXT NOT NULL,
     event_description TEXT,
     event_date DATE NOT NULL,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
     id_tutor INT REFERENCES users(id_user),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
