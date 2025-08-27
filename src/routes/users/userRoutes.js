@@ -7,10 +7,21 @@ import DeleteUserController from "../../controllers/users/deleteUserController.j
 
 const router = Router();
 
+
+// Get All Users from the database
 router.get("/", GetAllUsersController.getAllUser);
+
+// Get User by id
 router.get("/:id", GetOneUserController.getOneUser);
+
+// Create a new User
 router.post("/", CreateUserController.create);
+
+// Update a User from the database
 router.put("/:id", UpdateUserController.update);
+
+// Delete a User from the database
 router.delete("/:id", DeleteUserController.delete);
+
 
 export default router;
