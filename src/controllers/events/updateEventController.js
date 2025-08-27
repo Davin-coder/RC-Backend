@@ -23,7 +23,7 @@ const UpdateEventController = {
             return res.status(200).json({
                 success: true,
                 msg: "Event updated successful",
-                group: updatedEvent,
+                event: updatedEvent,
             });
         }catch(error){
             console.error("UpdateEvent Error:", error.message);

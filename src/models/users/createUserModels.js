@@ -1,13 +1,22 @@
 import pool from "../../middleware/connection.js"
 
-const createGroup = async ({ group_name, id_creator }) => {
+const createUser = async ({ id_city, id_cohort, id_clan, first_name, middle_name, first_surname, second_surname, email, password_user }) => {
     const { rows } = await pool.query(
-        `INSERT INTO groups (group_name, id_creator)
-        VALUES ($1, $2)
-        RETURNING id_group, group_name, id_creator, created_at`,
-        [group_name, id_creator ?? null]
+        `INSERT INTO users
+        (id_city,
+        id_cohort,
+        id_clan,
+        first_name,
+        middle_name,
+        first_surname,
+        second_surname,
+        email,
+        password_user)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        RETURNING id_user, id_city, id_cohort, id_clan, first_name, middle_name, first_surname, second_surname, email, password_user`,
+        [id_city, id_cohort, id_clan, first_name, middle_name, first_surname, second_surname, email, password_user]
     );
     return rows[0];
 };
 
-export default createGroup;
+export default createUser;

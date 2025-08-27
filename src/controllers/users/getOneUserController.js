@@ -1,10 +1,10 @@
-import getOneUserModels from "../../models/users/getOneUserModel.js"
+import getOneUser from "../../models/users/getOneUserModels.js"
 
 const GetOneUserController = {
     async getOneUser(req, res) {
         try {
             const id_user = req.params.id;
-            const user = await getOneUserModels.getUser(id_user);
+            const user = await getOneUser(id_user);
             res.status(200).json({  
                 success: true,
                 msg: "User retrieved successfully", 

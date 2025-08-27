@@ -1,16 +1,15 @@
 import pool from "../../middleware/connection.js"
 
-const deleteGroup = async (id_group) => {
+const deleteUser = async (id_user) => {
     try{
         const query = `
-        DELETE FROM groups WHERE id_group = $1
+        DELETE FROM users WHERE id_user = $1
         RETURNING *`;
-        const result = await pool.query(query, [id_group]);
+        const result = await pool.query(query, [id_user]);
         return result.rows[0];
     }catch(error){
         throw new Error('Database query failed: ' + error.message);
     }
 };
 
-
-export default deleteGroup;
+export default deleteUser;

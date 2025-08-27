@@ -73,7 +73,6 @@ CREATE TABLE users(
     second_surname VARCHAR(20),
     email VARCHAR(200) NOT NULL,
     password_user VARCHAR(256) NOT NULL,
-    photo_url TEXT,
     bio TEXT
 );
 
