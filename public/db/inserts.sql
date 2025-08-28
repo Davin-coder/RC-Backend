@@ -30,10 +30,16 @@ VALUES
 
 INSERT INTO users
 (id_city, id_cohort, id_clan, first_name, first_surname, email, password_user)
-VALUES (2, 3, 1, 'Alex', 'Tuiran', 'alex@email.com', '123');
+VALUES 
+(2, 3, 1, 'Alex', 'Tuiran', 'alex@email.com', '12345'),
+(1, 3, NULL, 'David', 'Martinez', 'DavidMartinez@email.com', '12345'),
+(1, 3, 1, 'Tony', 'Ficado', 'alex@email.com', '12345');
 
 INSERT INTO groups (group_name, id_creator)
 VALUES ('Software Factory', 1);
 
 INSERT INTO events (event_type, title, event_description, event_date)
 VALUES ('life_skills', 'Meet Soft-Skills', 'Be a better human with this event', '2025-01-11');
+
+INSERT INTO hackathons (h_title, h_desc, h_date, created_by)
+VALUES ('Proyecto Eneba', 'Presenta tus enebas', '2025-11-07', 2);

@@ -41,7 +41,7 @@ CREATE TABLE badges(
 CREATE TABLE challenges(
     id_challenge SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
-    challenge_description TEXT,
+    challenge_desc TEXT,
     difficulty TEXT CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
     start_date DATE, 
     end_date DATE
@@ -98,13 +98,11 @@ CREATE TABLE submissions (
 
 CREATE TABLE hackathons (
     id_hackathon SERIAL PRIMARY KEY,
-    hackathon_name TEXT NOT NULL,
-    hackathon_description TEXT,
-    start_at TIMESTAMPTZ,
-    end_at TIMESTAMPTZ,
-    hackathon_status TEXT CHECK (hackathon_status IN ('upcoming','ongoing','finished')) DEFAULT 'upcoming',
-    created_by INT REFERENCES users(id_user),
-    allow_teams BOOLEAN DEFAULT TRUE
+    h_title TEXT NOT NULL,
+    h_desc TEXT,
+    h_date DATE,
+    h_status TEXT CHECK (h_status IN ('upcoming','ongoing','finished')) DEFAULT 'upcoming',
+    created_by INT REFERENCES users(id_user)
 );
 
 CREATE TABLE hackathon_participants (

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import userRoutes from "./src/routes/users/userRoutes.js";
 import groupsRoutes from "./src/routes/groups/groupsRoutes.js"
 import eventsRoutes from "./src/routes/events/eventsRoutes.js"
+import hackathonsRoutes from "./src/routes/hackathons/hackathonsRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,9 @@ app.use("/groups", groupsRoutes);
 
 // ============= // Events EndPoints // =============
 app.use("/events", eventsRoutes);
+
+// ============= // Hackathons EndPoints // =============
+app.use("/hackathons", hackathonsRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
