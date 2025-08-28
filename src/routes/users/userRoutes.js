@@ -4,7 +4,8 @@ import GetOneUserController from "../../controllers/users/getOneUserController.j
 import CreateUserController from "../../controllers/users/createUserController.js";
 import UpdateUserController from "../../controllers/users/updateUserController.js";
 import DeleteUserController from "../../controllers/users/deleteUserController.js";
-import LoginUserController from "../../controllers/users/authController.js";
+import LoginUserController from "../../controllers/users/loginUserController.js";
+import LogoutUserController from "../../controllers/users/logoutUserController.js";
 
 const router = Router();
 
@@ -24,6 +25,9 @@ router.put("/:id", UpdateUserController.update);
 router.delete("/:id", DeleteUserController.delete);
 
 // Login for users
-router.post("/login", LoginUserController)
+router.post("/login", LoginUserController);
+
+// Logout for users
+router.post("/logout", LogoutUserController);
 
 export default router;
