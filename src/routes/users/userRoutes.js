@@ -4,6 +4,7 @@ import GetOneUserController from "../../controllers/users/getOneUserController.j
 import CreateUserController from "../../controllers/users/createUserController.js";
 import UpdateUserController from "../../controllers/users/updateUserController.js";
 import DeleteUserController from "../../controllers/users/deleteUserController.js";
+import LoginUserController from "../../controllers/users/authController.js";
 
 const router = Router();
 
@@ -21,5 +22,8 @@ router.put("/:id", UpdateUserController.update);
 
 // Delete a User from the database
 router.delete("/:id", DeleteUserController.delete);
+
+// Login for users
+router.post("/login", LoginUserController)
 
 export default router;

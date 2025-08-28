@@ -69,8 +69,8 @@ CREATE TABLE users(
     middle_name VARCHAR(20),
     first_surname VARCHAR(20) NOT NULL,
     second_surname VARCHAR(20),
-    email VARCHAR(200) NOT NULL,
-    password_user VARCHAR(256) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    password_user TEXT NOT NULL,
     bio TEXT
 );
 

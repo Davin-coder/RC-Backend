@@ -1,4 +1,4 @@
-import pool from "../../middleware/connection.js"
+import pool from "../../middleware/connection.js";
 
 const updateUser = async (id_user, { id_city, id_cohort, id_clan, first_name, middle_name, first_surname, second_surname, email, password_user }) => {
     const { rows } = await pool.query(
