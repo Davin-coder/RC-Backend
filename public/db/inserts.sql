@@ -43,3 +43,6 @@ VALUES ('life_skills', 'Meet Soft-Skills', 'Be a better human with this event', 
 
 INSERT INTO hackathons (h_title, h_desc, h_date, created_by)
 VALUES ('Proyecto Eneba', 'Presenta tus enebas', '2025-11-07', 2);
+
+INSERT INTO challenges (title, challenge_desc, difficulty)
+VALUES ('Python Calculator', 'Create a calculator with python', 'beginner');

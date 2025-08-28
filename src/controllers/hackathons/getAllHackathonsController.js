@@ -3,11 +3,11 @@ import getAllHackathons from "../../models/hackathons/getAllHackathonsModels.js"
 const GetAllHackathonsController = {
     async getAll(req, res) {
         try {
-            const users = await getAllHackathons();
+            const hackathons = await getAllHackathons();
             res.status(200).json({ 
                 success: true,
                 msg: "Hackathons retrieved successfully",
-                users
+                hackathons
             });
         }catch(error){
             console.error('GetAllHackathons Error:', error);

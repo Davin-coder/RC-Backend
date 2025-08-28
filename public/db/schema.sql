@@ -42,9 +42,7 @@ CREATE TABLE challenges(
     id_challenge SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     challenge_desc TEXT,
-    difficulty TEXT CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
-    start_date DATE, 
-    end_date DATE
+    difficulty TEXT CHECK (difficulty IN ('beginner', 'intermediate', 'advanced'))
 );
 
 CREATE TABLE project_templates (

@@ -19,6 +19,13 @@ u.first_name || ' ' || u.first_surname AS creator
 FROM hackathons h
 LEFT JOIN users u ON created_by = u.id_user;
 
+SELECT
+c.id_challenge
+c.title,
+c.challenge_desc,
+c.difficulty
+FROM challenges c;
+
 -- ============ // Reiniciador de tablas // ============
 TRUNCATE TABLE 
     cities,
