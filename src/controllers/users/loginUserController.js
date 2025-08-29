@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import findByEmail from "../../models/users/userModel.js";
 import pool from "../../middleware/connection.js"; // 👈 Pool de pg
 
-// Arma el nombre visible usando los campos de la tabla users
 function buildDisplayName(u) {
   const parts = [
     u.first_name,
@@ -25,7 +24,6 @@ async function buildDisplayClanId(userId){
   return rows[0]?.clan_name;
 }
 
-// Obtiene el primer rol asignado al usuario (ajusta prioridad si quieres)
 async function getUserRoleName(userId) {
   const q = `
     SELECT r.role_name
@@ -38,16 +36,14 @@ async function getUserRoleName(userId) {
   return rows[0]?.role_name || "coder";
 }
 
-
 const LoginUserController = async (req, res) => {
   try {
     debugger
-    const email = String(req.body?.email || "").trim().toLowerCase();
+    const email = String(req.body?.email || "").trim();
     const password_user = String(req.body?.password_user || "");
     if (!email || !password_user) {
       return res.status(400).json({ ok: false, msg: "Email and password are required" });
     }
-    // Debe devolver: id_user, email, password_user, first_name, middle_name, first_surname, second_surname
     const user = await findByEmail(email);
     if (!user) return res.status(404).json({ ok: false, msg: "User not found" });
     const ok = await bcrypt.compare(password_user, user.password_user);
@@ -59,12 +55,10 @@ const LoginUserController = async (req, res) => {
     req.session.user = {
       id: user.id_user,
       email: user.email,
-      name,   // ← nombre completo
+      name,
       role,
-      id_clan  // ← "coder" | "team_leader" | "admin"
+      id_clan
     };
-
-    // Asegura persistencia de la sesión antes de responder
     req.session.save(err => {
       if (err) {
         console.error("Session save error:", err);
@@ -73,7 +67,7 @@ const LoginUserController = async (req, res) => {
       return res.json({
         ok: true,
         message: "Login successful",
-        user: req.session.user, // { id, email, name, role }
+        user: req.session.user,
       });
     });
   } catch (error) {
