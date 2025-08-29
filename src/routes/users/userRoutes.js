@@ -1,3 +1,4 @@
+// src/routes/users/userRoutes.js
 import { Router } from "express";
 import GetAllUsersController from "../../controllers/users/getAllUsersController.js";
 import GetOneUserController from "../../controllers/users/getOneUserController.js";
@@ -9,7 +10,16 @@ import LogoutUserController from "../../controllers/users/logoutUserController.j
 
 const router = Router();
 
-// Get All Users from the database
+/** ⚠️ IMPORTANTE:
+ *  /me DEBE IR ANTES de /:id para que no lo capture como id.
+ */
+router.get("/me", (req, res) => {
+  if (!req.session?.user) return res.status(401).json({ ok: false, msg: "No auth" });
+  // Devuelve solo lo necesario (incluye role para el guard del front)
+  return res.json({ ok: true, ...req.session.user });
+});
+
+// Get All Users
 router.get("/", GetAllUsersController.getAllUser);
 
 // Get User by id
@@ -18,16 +28,16 @@ router.get("/:id", GetOneUserController.getOneUser);
 // Create a new User
 router.post("/", CreateUserController.create);
 
-// Update a User from the database
+// Update a User
 router.put("/:id", UpdateUserController.update);
 
-// Delete a User from the database
+// Delete a User
 router.delete("/:id", DeleteUserController.delete);
 
-// Login for users
+// Login (asegúrate que el controller ponga req.session.user = { id, email, role, ... })
 router.post("/login", LoginUserController);
 
-// Logout for users
+// Logout (destruye la sesión)
 router.post("/logout", LogoutUserController);
 
 export default router;

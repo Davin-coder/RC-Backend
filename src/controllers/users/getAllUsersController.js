@@ -14,7 +14,7 @@ const GetAllUsersController = {
             res.status(500).json({ 
                 success: false,
                 error: true, 
-                msg: "Internal server error, try later" 
+                msg: error.message 
             });
         }
     }
