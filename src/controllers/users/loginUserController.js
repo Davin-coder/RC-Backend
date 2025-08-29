@@ -13,6 +13,17 @@ function buildDisplayName(u) {
   ].filter(Boolean);
   return parts.join(" ").trim();
 }
+async function buildDisplayClanId(userId){
+  const q = `
+    SELECT c.clan_name
+    FROM users u
+    LEFT JOIN clans c ON c.id_clan = u.id_clan
+    WHERE u.id_user = $1
+    LIMIT 1
+  `;
+  const { rows } = await pool.query(q, [userId]);
+  return rows[0]?.clan_name;
+}
 
 // Obtiene el primer rol asignado al usuario (ajusta prioridad si quieres)
 async function getUserRoleName(userId) {
@@ -27,31 +38,30 @@ async function getUserRoleName(userId) {
   return rows[0]?.role_name || "coder";
 }
 
+
 const LoginUserController = async (req, res) => {
   try {
+    debugger
     const email = String(req.body?.email || "").trim().toLowerCase();
     const password_user = String(req.body?.password_user || "");
-
     if (!email || !password_user) {
       return res.status(400).json({ ok: false, msg: "Email and password are required" });
     }
-
     // Debe devolver: id_user, email, password_user, first_name, middle_name, first_surname, second_surname
     const user = await findByEmail(email);
     if (!user) return res.status(404).json({ ok: false, msg: "User not found" });
-
     const ok = await bcrypt.compare(password_user, user.password_user);
     if (!ok) return res.status(401).json({ ok: false, msg: "Invalid credentials" });
-
     const name = buildDisplayName(user);
+    const id_clan = await buildDisplayClanId(user.id_user);
     const role = await getUserRoleName(user.id_user);
-
     // 🔑 Guarda en sesión lo que usará el front y /users/me
     req.session.user = {
       id: user.id_user,
       email: user.email,
       name,   // ← nombre completo
-      role,   // ← "coder" | "team_leader" | "admin"
+      role,
+      id_clan  // ← "coder" | "team_leader" | "admin"
     };
 
     // Asegura persistencia de la sesión antes de responder
@@ -67,7 +77,7 @@ const LoginUserController = async (req, res) => {
       });
     });
   } catch (error) {
-    console.error("LoginUser Error:", error);
+    console.error("LoginUser Error:", error.message);
     return res.status(500).json({ ok: false, msg: "Internal server error, try later" });
   }
 };

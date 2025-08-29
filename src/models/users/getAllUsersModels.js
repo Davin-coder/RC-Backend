@@ -14,7 +14,7 @@ const getAllUserModels = {
             u.email
             FROM users u
             INNER JOIN cities ci ON u.id_city = ci.id_city
-            INNER JOIN clans cl ON u.id_clan = cl.id_clan;`;
+            LEFT JOIN clans cl ON u.id_clan = cl.id_clan;`;
             const result = await pool.query(query);
             return result.rows; 
         }catch(error){
