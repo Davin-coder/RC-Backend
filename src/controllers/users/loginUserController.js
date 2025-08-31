@@ -1,56 +1,25 @@
 // src/controllers/users/loginUserController.js
 import bcrypt from "bcrypt";
-import findByEmail from "../../models/users/userModel.js";
-import pool from "../../middleware/connection.js"; // 👈 Pool de pg
-
-function buildDisplayName(u) {
-  const parts = [
-    u.first_name,
-    u.middle_name,
-    u.first_surname,
-    u.second_surname,
-  ].filter(Boolean);
-  return parts.join(" ").trim();
-}
-async function buildDisplayClanId(userId){
-  const q = `
-    SELECT c.clan_name
-    FROM users u
-    LEFT JOIN clans c ON c.id_clan = u.id_clan
-    WHERE u.id_user = $1
-    LIMIT 1
-  `;
-  const { rows } = await pool.query(q, [userId]);
-  return rows[0]?.clan_name;
-}
-
-async function getUserRoleName(userId) {
-  const q = `
-    SELECT r.role_name
-    FROM user_roles ur
-    JOIN roles r ON r.id_role = ur.id_role
-    WHERE ur.id_user = $1
-    LIMIT 1
-  `;
-  const { rows } = await pool.query(q, [userId]);
-  return rows[0]?.role_name || "coder";
-}
+import buildDisplayName from "../../utils/users/displayName.js";
+import { findByEmail, getClanNameByUserId, getRoleNameByUserId } from "../../models/users/userModel.js";
 
 const LoginUserController = async (req, res) => {
   try {
-    debugger
     const email = String(req.body?.email || "").trim();
     const password_user = String(req.body?.password_user || "");
+    
     if (!email || !password_user) {
       return res.status(400).json({ ok: false, msg: "Email and password are required" });
     }
     const user = await findByEmail(email);
     if (!user) return res.status(404).json({ ok: false, msg: "User not found" });
+
     const ok = await bcrypt.compare(password_user, user.password_user);
     if (!ok) return res.status(401).json({ ok: false, msg: "Invalid credentials" });
-    const name = buildDisplayName(user);
-    const id_clan = await buildDisplayClanId(user.id_user);
-    const role = await getUserRoleName(user.id_user);
+
+    const name = buildDisplayName(user),
+      id_clan = await getClanNameByUserId(user.id_user),
+      role = await getRoleNameByUserId(user.id_user);
     // 🔑 Guarda en sesión lo que usará el front y /users/me
     req.session.user = {
       id: user.id_user,
@@ -59,9 +28,9 @@ const LoginUserController = async (req, res) => {
       role,
       id_clan
     };
-    req.session.save(err => {
-      if (err) {
-        console.error("Session save error:", err);
+    req.session.save(error => {
+      if (error) {
+        console.error("Session save error:", error.message);
         return res.status(500).json({ ok: false, msg: "Session error" });
       }
       return res.json({
