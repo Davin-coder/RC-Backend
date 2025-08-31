@@ -32,14 +32,19 @@ INSERT INTO users
 (id_city, id_cohort, id_clan, first_name, first_surname, email, password_user)
 VALUES 
 (2, 3, 1, 'Alex', 'Tuiran', 'alex@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle'),
-(1, 3, NULL, 'David', 'Martinez', 'DavidMartinez@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle'),
+(1, 3, NULL, 'David', 'Martinez', 'davidmartinez@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle'),
 (1, 3, 1, 'Tony', 'Ficado', 'tony@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle'),
 (2, 3, 1, 'Eduardo', 'Pertuz', 'edu@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle'),
 (2, 3, 3, 'Andres', 'Gonzales', 'andres@email.com', '$2b$10$HD7XtAm6jEVj7ReIlfD94.06G3Rj80owUDjEbIsbt.wWbLpRp4Mle');
 
 INSERT INTO user_roles
 (id_user, id_role, id_tl_area)
-VALUES (2, 1, 1);
+VALUES
+(1, 3, NULL),
+(2, 1, 1),
+(3, 3, NULL),
+(4, 3, NULL),
+(5, 2, NULL);
 
 INSERT INTO groups (group_name, id_creator)
 VALUES ('Software Factory', 1);

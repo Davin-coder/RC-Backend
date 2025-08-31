@@ -5,7 +5,7 @@ import { findByEmail, getClanNameByUserId, getRoleNameByUserId } from "../../mod
 
 const LoginUserController = async (req, res) => {
   try {
-    const email = String(req.body?.email || "").trim();
+    const email = String(req.body?.email || "").trim().toLowerCase();
     const password_user = String(req.body?.password_user || "");
     
     if (!email || !password_user) {
