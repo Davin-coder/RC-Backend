@@ -1,5 +1,5 @@
 // src/controllers/projectTemplates/getOneTemplateController.js
-import getOneTemplate from "../../models/project_templates/getOneTemplate.js";
+import getOneTemplate from "../../models/templates/getOneTemplateModels.js";
 
 const GetOneTemplateController = {
   async getOne(req, res) {

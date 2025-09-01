@@ -1,5 +1,5 @@
 // src/controllers/projectTemplates/deleteTemplateController.js
-import deleteTemplate from "../../models/project_templates/deleteTemplate.js";
+import deleteTemplate from "../../models/templates/deleteTemplateModels.js";
 
 const DeleteTemplateController = {
   async delete(req, res) {

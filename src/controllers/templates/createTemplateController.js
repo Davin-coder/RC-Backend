@@ -1,5 +1,5 @@
 // src/controllers/projectTemplates/createTemplateController.js
-import createTemplate from "../../models/project_templates/createTemplateModels.js";
+import createTemplate from "../../models/templates/createTemplateModels.js";
 
 const CreateTemplateController = {
   async create(req, res) {

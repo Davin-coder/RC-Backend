@@ -1,8 +1,7 @@
 // src/models/getAllTemplateModels.js
 import pool from "../../middleware/connection.js";
 
-const getAllTemplateModels = {
-  async getAllTemplates() {
+const getAllTemplateModels = async () => {
     try {
       const query = `
         SELECT
@@ -16,7 +15,6 @@ const getAllTemplateModels = {
     } catch (error) {
       throw new Error("Database query failed: " + error.message);
     }
-  },
 };
 
 export default getAllTemplateModels;

@@ -1,5 +1,5 @@
 // src/controllers/projectTemplates/updateTemplateController.js
-import updateTemplate from "../../models/project_templates/updateTemplate.js";
+import updateTemplate from "../../models/templates/updateTemplateModels.js";
 
 const UpdateTemplateController = {
   async update(req, res) {
