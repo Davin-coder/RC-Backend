@@ -1,0 +1,13 @@
+{
+  "name": "RC-Backend",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "pg": "^8.16.3"
+  }
+}
