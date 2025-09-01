@@ -1,4 +1,3 @@
-// src/controllers/projectTemplates/updateTemplateController.js
 import updateTemplate from "../../models/templates/updateTemplateModels.js";
 
 const UpdateTemplateController = {
@@ -6,7 +5,6 @@ const UpdateTemplateController = {
     try {
       const id_template = req.params.id;
       const { title, project_description } = req.body;
-
       // Validación sencilla: al menos un campo para actualizar
       if (title === undefined && project_description === undefined) {
         return res.status(400).json({
@@ -15,12 +13,10 @@ const UpdateTemplateController = {
           msg: "At least one field (title, project_description) must be provided",
         });
       }
-
       const updatedTemplate = await updateTemplate(id_template, {
         title,
         project_description,
       });
-
       if (!updatedTemplate) {
         return res.status(404).json({
           success: false,
@@ -28,7 +24,6 @@ const UpdateTemplateController = {
           msg: "Template not found",
         });
       }
-
       return res.status(200).json({
         success: true,
         msg: "Template updated successfully",

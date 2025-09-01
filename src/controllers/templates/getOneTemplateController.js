@@ -6,7 +6,6 @@ const GetOneTemplateController = {
     try {
       const id_template = req.params.id;
       const template = await getOneTemplate(id_template);
-
       if (!template) {
         return res.status(404).json({
           success: false,
@@ -14,7 +13,6 @@ const GetOneTemplateController = {
           msg: "Template not found",
         });
       }
-
       res.status(200).json({
         success: true,
         msg: "Template retrieved successfully",

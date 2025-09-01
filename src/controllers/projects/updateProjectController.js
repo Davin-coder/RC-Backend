@@ -5,7 +5,6 @@ const UpdateProjectController = {
         try {
             const id_project_submissions = req.params.id;
             const { repo_url, demo_url, screenshots, notes } = req.body;
-            // Validación sencilla: al menos un campo para actualizar
             if (
                 repo_url === undefined &&
                 demo_url === undefined &&
