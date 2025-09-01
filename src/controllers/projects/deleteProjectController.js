@@ -1,4 +1,4 @@
-import deleteProject from "../../models/projects/deleteProject.js";
+import deleteProject from "../../models/projects/deleteProjectModels.js";
 
 const DeleteProjectController = {
     async delete(req, res) {

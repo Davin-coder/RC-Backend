@@ -1,11 +1,10 @@
-import updateProject from "../../models/projects/updateProject.js";
+import updateProject from "../../models/projects/updateProjectModels.js";
 
 const UpdateProjectController = {
     async update(req, res) {
         try {
             const id_project_submissions = req.params.id;
             const { repo_url, demo_url, screenshots, notes } = req.body;
-
             // Validación sencilla: al menos un campo para actualizar
             if (
                 repo_url === undefined &&
@@ -19,14 +18,12 @@ const UpdateProjectController = {
                     msg: "At least one field (repo_url, demo_url, screenshots, notes) must be provided",
                 });
             }
-
             const updatedProject = await updateProject(id_project_submissions, {
                 repo_url,
                 demo_url,
                 screenshots,
                 notes,
             });
-
             if (!updatedProject) {
                 return res.status(404).json({
                     success: false,
@@ -34,7 +31,6 @@ const UpdateProjectController = {
                     msg: "Project not found",
                 });
             }
-
             return res.status(200).json({
                 success: true,
                 msg: "Project updated successfully",

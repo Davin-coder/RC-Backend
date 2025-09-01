@@ -5,8 +5,11 @@ import session from "express-session";
 import userRoutes from "./src/routes/users/userRoutes.js";
 import groupsRoutes from "./src/routes/groups/groupsRoutes.js";
 import eventsRoutes from "./src/routes/events/eventsRoutes.js";
+import eventRegistrationsRoutes from "./src/routes/events/registrationsRoutes.js";
 import hackathonsRoutes from "./src/routes/hackathons/hackathonsRoutes.js";
 import challengesRoutes from "./src/routes/challenges/challengesRoutes.js";
+import projectsRoutes from "./src/routes/projects/projectsRoutes.js"
+
 
 dotenv.config();
 const app = express();
@@ -50,13 +53,16 @@ app.use("/groups", groupsRoutes);
 
 // ============= // Events EndPoints // =============
 app.use("/events", eventsRoutes);
+app.use("/events", eventRegistrationsRoutes);
 
 // ============= // Hackathons EndPoints // =============
 app.use("/hackathons", hackathonsRoutes);
 
-// ============= // Hackathons EndPoints // =============
+// ============= // Challenges EndPoints // =============
 app.use("/challenges", challengesRoutes);
 
+// ============= // Projects EndPoints // =============
+app.use("/projects", projectsRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);

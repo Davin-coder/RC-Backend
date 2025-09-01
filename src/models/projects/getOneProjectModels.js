@@ -4,18 +4,18 @@ const getOneProject = async (id_project_submissions) => {
     try {
         const query = `
         SELECT
-            ps.id_project_submissions,
-            pt.title AS template_title,
-            pt.project_description,
-            ps.id_user,
-            u.first_name,
-            u.first_surname,
-            g.group_name,
-            ps.repo_url,
-            ps.demo_url,
-            ps.screenshots,
-            ps.notes,
-            ps.created_at
+        ps.id_project_submissions,
+        pt.title AS template_title,
+        pt.project_description,
+        ps.id_user,
+        u.first_name,
+        u.first_surname,
+        g.group_name,
+        ps.repo_url,
+        ps.demo_url,
+        ps.screenshots,
+        ps.notes,
+        ps.created_at
         FROM project_submissions ps
         INNER JOIN project_templates pt ON ps.id_template = pt.id_template
         LEFT JOIN users u ON ps.id_user = u.id_user

@@ -4,16 +4,16 @@ const getAllProjects = async () => {
     try {
         const query = `
         SELECT
-            ps.id_project_submissions,
-            pt.title AS template_title,
-            pt.project_description,
-            ps.repo_url,
-            ps.demo_url,
-            ps.screenshots,
-            ps.notes,
-            ps.created_at,
-            u.first_name || ' ' || u.first_surname AS user_creator,
-            g.group_name AS group_creator
+        ps.id_project_submissions,
+        pt.title AS template_title,
+        pt.project_description,
+        ps.repo_url,
+        ps.demo_url,
+        ps.screenshots,
+        ps.notes,
+        ps.created_at,
+        u.first_name || ' ' || u.first_surname AS user_creator,
+        g.group_name AS group_creator
         FROM project_submissions ps
         INNER JOIN project_templates pt ON ps.id_template = pt.id_template
         LEFT JOIN users u ON ps.id_user = u.id_user

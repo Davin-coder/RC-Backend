@@ -3,7 +3,7 @@ import getAllProjectModels from "../../models/projects/getAllProjectModels.js";
 const GetAllProjectController = {
     async getAll(req, res) {
         try {
-            const projects = await getAllProjectModels.getAllProjects();
+            const projects = await getAllProjectModels();
             res.status(200).json({
                 success: true,
                 msg: "Projects retrieved successfully",
