@@ -10,9 +10,6 @@ import LogoutUserController from "../../controllers/users/logoutUserController.j
 
 const router = Router();
 
-/** ⚠️ IMPORTANTE:
- *  /me DEBE IR ANTES de /:id para que no lo capture como id.
- */
 router.get("/me", (req, res) => {
   if (!req.session?.user) return res.status(401).json({ ok: false, msg: "No auth" });
   // Devuelve solo lo necesario (incluye role para el guard del front)
@@ -34,10 +31,10 @@ router.put("/:id", UpdateUserController.update);
 // Delete a User
 router.delete("/:id", DeleteUserController.delete);
 
-// Login (asegúrate que el controller ponga req.session.user = { id, email, role, ... })
+// Login
 router.post("/login", LoginUserController);
 
-// Logout (destruye la sesión)
+// Logout
 router.post("/logout", LogoutUserController);
 
 export default router;
